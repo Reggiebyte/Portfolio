@@ -17,7 +17,7 @@ function validateForm() {
 
     // Clear previous status
     formStatus.textContent = '';
-    formStatus.className = 'form-status';
+    formStatus.className = 'form-status'; 
 
     // Validate name
     if (name.trim() === '') {
