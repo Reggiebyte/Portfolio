@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js.js" defer></script>
+  </head>
+
+  <body>
+    <div class="header">
+      <header>
+        <nav>
+          <h1>Welcome to my portfolio</h1>
+          <div class="nav-controls">
+              <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <section id="home">
+      <div class="home-content">
+        <div class="profile-image">
+          <img
+            src="VHWR8117.JPG"
+            alt="Profile picture of Reginald"
+            id="profile-img"
+          />
+        </div>
+        <div class="home-text">
+          <h2>Hello</h2>
+          <p>
+            I am Reginald, a student web developer and designer. I create clean,
+            interactive websites and apps, always exploring new tools to make
+            projects engaging and user-friendly.
+          </p>
+          <a href="#projects"><button>See My Work</button></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Hi! I’m Reginald, a passionate student web developer and designer. I
+        love creating websites and applications that are both functional and
+        visually appealing. I enjoy learning new technologies and using them to
+        solve real-world problems. When I’m not coding, I like exploring design
+        trends, experimenting with creative projects, and finding ways to make
+        technology more accessible and enjoyable. My goal is to build projects
+        that not only showcase my skills but also make a positive impact for
+        users.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+
+      <div class="Vortex Nest">
+        <div class="Vortex">
+          <h3>Ghana Senior High Schools</h3>
+          <p>
+            This website provides detailed information on senior high schools in
+            Ghana. Since such data is not easily accessible online, the site
+            helps students make informed choices about their schools based on
+            their personal preferences and interests.
+          </p>
+        </div>
+
+        <div class="Novari Study">
+          <h3>Novari Study</h3>
+          <p>
+            I believe that studying should be fun and engaging, not just a
+            chore. That's why I created Novari Study, a study app that uses AI
+            to help you learn and retain information more effectively. With
+            Novari Study, you can create personalized study plans, track your
+            progress, and get instant feedback on your answers. You can also
+            access a vast library of study tools, including flashcards, quizzes,
+            and practice tests. Whether you're a student, a teacher, or just
+            someone who wants to learn something new, Novari Study is designed
+            to make learning more enjoyable and productive. While the app is
+            still in development, most features are already functional and
+            available for testing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form id="contact-form" class="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Your full name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            name="subject"
+            placeholder="What's this about?"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Your message here..."
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number (optional)</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder="Your phone number"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+      <div id="form-status" class="form-status"></div>
+    </section>
+
+    <footer>
+      <p>A Fraser Youth Coding Project. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌓</button>
+  </body>
+</html>
