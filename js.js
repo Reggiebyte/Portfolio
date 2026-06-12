@@ -1,131 +1,180 @@
-function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+// FYC — Fraser Youth Coding | GSAP Animations
 
-function validatePhone(phone) {
-    if (phone === '') return true; // Phone is optional
-    return /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(phone);
-}
+gsap.registerPlugin(ScrollTrigger);
 
-function validateForm() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    const phone = document.getElementById('phone').value;
-    const formStatus = document.getElementById('form-status');
+/* ─── Custom Cursor ──────────────────────────────────────────── */
+const cursor   = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mX = 0, mY = 0, fX = 0, fY = 0;
 
-    // Clear previous status
-    formStatus.textContent = '';
-    formStatus.className = 'form-status'; 
+document.addEventListener('mousemove', e => {
+  mX = e.clientX; mY = e.clientY;
+  gsap.to(cursor, { x: mX, y: mY, duration: 0.04, ease: 'none' });
+});
 
-    // Validate name
-    if (name.trim() === '') {
-        showFormStatus('Please enter your name', 'error');
-        return false;
+(function tickFollower() {
+  fX += (mX - fX) * 0.1;
+  fY += (mY - fY) * 0.1;
+  gsap.set(follower, { x: fX, y: fY });
+  requestAnimationFrame(tickFollower);
+})();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hovered');    follower.classList.add('hovered'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hovered'); follower.classList.remove('hovered'); });
+});
+
+/* ─── Progress Bar ───────────────────────────────────────────── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+/* ─── Navigation ─────────────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+const menuBtn    = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
+document.querySelectorAll('.mobile-link').forEach(l =>
+  l.addEventListener('click', () => {
+    menuBtn.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  })
+);
+
+/* ─── Smooth Anchor Scroll ───────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+/* ─── Hero Entrance ──────────────────────────────────────────── */
+gsap.timeline({ defaults: { ease: 'power3.out' } })
+  .to('.hero-badge',       { opacity: 1, y: 0, duration: .8, delay: .2 })
+  .to('.hero-line',        { opacity: 1, y: 0, duration: .9, stagger: .14 }, '-=.35')
+  .to('.hero-subtitle',    { opacity: 1, y: 0, duration: .8 }, '-=.4')
+  .to('.hero-actions',     { opacity: 1, y: 0, duration: .7 }, '-=.4')
+  .to('.hero-stats',       { opacity: 1, y: 0, duration: .7 }, '-=.3')
+  .to('.scroll-indicator', { opacity: 1,        duration: .7 }, '-=.2');
+
+/* ─── Floating Code Snippets ─────────────────────────────────── */
+gsap.from('.code-snippet', {
+  opacity: 0, y: 14, stagger: .22, duration: 1.2, delay: 1.3, ease: 'power2.out'
+});
+gsap.to('.code-snippet', {
+  y: '+=14', repeat: -1, yoyo: true, ease: 'sine.inOut',
+  stagger: { each: .6, from: 'random' }, duration: 3.5
+});
+
+/* ─── Orb Drift ──────────────────────────────────────────────── */
+gsap.to('.orb-1', { x: 52,  y: 32,  repeat: -1, yoyo: true, ease: 'sine.inOut', duration: 7 });
+gsap.to('.orb-2', { x: -38, y: -24, repeat: -1, yoyo: true, ease: 'sine.inOut', duration: 9 });
+gsap.to('.orb-3', { x: 28,  y: 44,  repeat: -1, yoyo: true, ease: 'sine.inOut', duration: 8 });
+
+/* ─── Scroll Reveal ──────────────────────────────────────────── */
+gsap.utils.toArray('.reveal').forEach(el => {
+  gsap.to(el, {
+    opacity: 1, y: 0, duration: .85, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' }
+  });
+});
+
+/* ─── Counter Animations ─────────────────────────────────────── */
+document.querySelectorAll('.stat-num').forEach(el => {
+  const end = parseInt(el.dataset.count, 10);
+  ScrollTrigger.create({
+    trigger: el, start: 'top 85%', once: true,
+    onEnter() {
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: end, duration: 1.6, ease: 'power2.out',
+        onUpdate() { el.textContent = Math.round(obj.val); }
+      });
     }
+  });
+});
 
-    // Validate email
-    if (!validateEmail(email)) {
-        showFormStatus('Please enter a valid email address', 'error');
-        return false;
-    }
+/* ─── Services Stagger + Icon Tilt ──────────────────────────── */
+gsap.from('.service-card', {
+  opacity: 0, y: 48, stagger: .1, duration: .85, ease: 'power3.out',
+  scrollTrigger: { trigger: '.services-grid', start: 'top 80%' }
+});
+document.querySelectorAll('.service-card').forEach(card => {
+  const icon = card.querySelector('.service-icon');
+  card.addEventListener('mouseenter', () => gsap.to(icon, { rotation: 6,  duration: .3, ease: 'back.out(2)' }));
+  card.addEventListener('mouseleave', () => gsap.to(icon, { rotation: 0,  duration: .3, ease: 'back.out(2)' }));
+});
 
-    // Validate subject
-    if (subject.trim() === '') {
-        showFormStatus('Please enter a subject', 'error');
-        return false;
-    }
+/* ─── Project Cards Parallax ─────────────────────────────────── */
+gsap.utils.toArray('.project-card').forEach(card => {
+  gsap.to(card, {
+    y: -18, ease: 'none',
+    scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+  });
+});
 
-    // Validate message
-    if (message.trim() === '') {
-        showFormStatus('Please enter your message', 'error');
-        return false;
-    }
+/* ─── Team Cards Stagger ─────────────────────────────────────── */
+gsap.from('.team-card', {
+  opacity: 0, y: 40, stagger: .12, duration: .85, ease: 'power3.out',
+  scrollTrigger: { trigger: '.team-grid', start: 'top 82%' }
+});
 
-    // Validate phone (if provided)
-    if (phone && !validatePhone(phone)) {
-        showFormStatus('Please enter a valid phone number', 'error');
-        return false;
-    }
+/* ─── Tech Stack Stagger ─────────────────────────────────────── */
+gsap.from('.tech-item', {
+  opacity: 0, x: -16, stagger: .07, duration: .5, ease: 'power2.out',
+  scrollTrigger: { trigger: '.about-tech-stack', start: 'top 82%' }
+});
 
-    return true;
-}
+/* ─── Footer ─────────────────────────────────────────────────── */
+gsap.from('.footer-brand, .footer-links', {
+  opacity: 0, y: 26, stagger: .1, duration: .75, ease: 'power3.out',
+  scrollTrigger: { trigger: '.footer', start: 'top 90%' }
+});
 
-function showFormStatus(message, type) {
-    const formStatus = document.getElementById('form-status');
-    formStatus.textContent = message;
-    formStatus.className = `form-status ${type}`;
-}
+/* ─── Contact Form ───────────────────────────────────────────── */
+const form       = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
 
-function handleFormSubmission(event) {
-    event.preventDefault();
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const btn  = form.querySelector('button[type="submit"]');
+  const span = btn.querySelector('span');
+  const orig = span.textContent;
 
-    if (validateForm()) {
-        // Simulate form submission
-        showFormStatus('Message sent successfully! I will get back to you soon.', 'success');
+  span.textContent = 'Sending…';
+  btn.disabled = true;
 
-        // In a real application, you would send the form data to a server here
-        // For example:
-        // const formData = {
-        //     name: document.getElementById('name').value,
-        //     email: document.getElementById('email').value,
-        //     subject: document.getElementById('subject').value,
-        //     message: document.getElementById('message').value,
-        //     phone: document.getElementById('phone').value
-        // };
-        // fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(formData)
-        // });
+  setTimeout(() => {
+    formStatus.className = 'form-status success';
+    formStatus.textContent = "Message sent! We'll get back to you within 24 hours.";
+    gsap.from(formStatus, { opacity: 0, y: 8, duration: .4, ease: 'power2.out' });
 
-        // Reset form after successful submission
-        document.getElementById('contact-form').reset();
-    }
-}
+    form.reset();
+    span.textContent = orig;
+    btn.disabled = false;
 
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmission);
-    }
-
-    // Theme toggle functionality - moved outside the form check
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Set initial theme
-    if (savedTheme) {
-        body.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    } else if (prefersDark) {
-        body.setAttribute('data-theme', 'dark');
-        updateThemeIcon('dark');
-    }
-
-    // Theme toggle button
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-    }
-
-    // Update theme icon based on current theme
-    function updateThemeIcon(theme) {
-        if (themeToggle) {
-            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    setTimeout(() => {
+      gsap.to(formStatus, {
+        opacity: 0, duration: .4,
+        onComplete() {
+          formStatus.className = 'form-status';
+          formStatus.textContent = '';
+          gsap.set(formStatus, { opacity: 1 });
         }
-    }
+      });
+    }, 5000);
+  }, 1400);
 });

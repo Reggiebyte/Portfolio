@@ -1,174 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="js.js" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FYC — Fraser Youth Coding</title>
+  <meta name="description" content="Fraser Youth Coding (FYC) — Building tomorrow's digital world through innovative web development, apps, and AI solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-  <body>
-    <div class="header">
-      <header>
-        <nav>
-          <h1>Welcome to my portfolio</h1>
-          <div class="nav-controls">
-              <ul class="nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#projects">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <span class="logo-text">FYC</span>
+        <span class="logo-sub">Fraser Youth Coding</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#team" class="nav-link">Team</a>
+        <a href="#contact" class="nav-link nav-cta">Get In Touch</a>
+      </div>
+      <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <section id="home">
-      <div class="home-content">
-        <div class="profile-image">
-          <img
-            src="VHWR8117.JPG"
-            alt="Profile picture of Reginald"
-            id="profile-img"
-          />
-        </div>
-        <div class="home-text">
-          <h2>Hello</h2>
-          <p>
-            I am Reginald, a student web developer and designer. I create clean,
-            interactive websites and apps, always exploring new tools to make
-            projects engaging and user-friendly.
-          </p>
-          <a href="#projects"><button>See My Work</button></a>
-        </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#team" class="mobile-link">Team</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="floating-code">
+      <div class="code-snippet" style="top:15%;left:4%">const future = await fyc.build();</div>
+      <div class="code-snippet" style="top:68%;right:4%">fyc.launch({ impact: true });</div>
+      <div class="code-snippet" style="top:38%;right:2%">npm install @fyc/excellence</div>
+      <div class="code-snippet" style="bottom:22%;left:2%">git push --world-changing</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Available for Projects</span>
       </div>
-    </section>
-
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        Hi! I’m Reginald, a passionate student web developer and designer. I
-        love creating websites and applications that are both functional and
-        visually appealing. I enjoy learning new technologies and using them to
-        solve real-world problems. When I’m not coding, I like exploring design
-        trends, experimenting with creative projects, and finding ways to make
-        technology more accessible and enjoyable. My goal is to build projects
-        that not only showcase my skills but also make a positive impact for
-        users.
+      <h1 class="hero-title">
+        <span class="hero-line">We Build</span>
+        <span class="hero-line gradient-text">Digital</span>
+        <span class="hero-line">Excellence</span>
+      </h1>
+      <p class="hero-subtitle">
+        Fraser Youth Coding — a next-generation agency creating powerful web experiences,
+        mobile applications, and AI-driven solutions that move the world forward.
       </p>
-    </section>
-
-    <section id="projects">
-      <h2>My Projects</h2>
-
-      <div class="Vortex Nest">
-        <div class="Vortex">
-          <h3>Ghana Senior High Schools</h3>
-          <p>
-            This website provides detailed information on senior high schools in
-            Ghana. Since such data is not easily accessible online, the site
-            helps students make informed choices about their schools based on
-            their personal preferences and interests.
-          </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <span>View Our Work</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Start a Project</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-value"><span class="stat-num" data-count="15">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-label">Projects</span>
         </div>
-
-        <div class="Novari Study">
-          <h3>Novari Study</h3>
-          <p>
-            I believe that studying should be fun and engaging, not just a
-            chore. That's why I created Novari Study, a study app that uses AI
-            to help you learn and retain information more effectively. With
-            Novari Study, you can create personalized study plans, track your
-            progress, and get instant feedback on your answers. You can also
-            access a vast library of study tools, including flashcards, quizzes,
-            and practice tests. Whether you're a student, a teacher, or just
-            someone who wants to learn something new, Novari Study is designed
-            to make learning more enjoyable and productive. While the app is
-            still in development, most features are already functional and
-            available for testing.
-          </p>
+        <div class="stat-divider"></div>
+        <div class="hero-stat">
+          <div class="stat-value"><span class="stat-num" data-count="5">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-label">Clients</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="hero-stat">
+          <div class="stat-value"><span class="stat-num" data-count="2">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-label">Years</span>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form id="contact-form" class="contact-form">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            placeholder="Your full name"
-            required
-          />
+  <!-- About -->
+  <section id="about" class="about section-padding">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label reveal">About FYC</div>
+          <h2 class="section-title reveal">
+            Coding the future,<br>
+            <span class="gradient-text">one line at a time</span>
+          </h2>
+          <p class="about-desc reveal">
+            Fraser Youth Coding (FYC) is a youth-led digital agency dedicated to building
+            exceptional web experiences and innovative software solutions. We combine technical
+            expertise with creative vision to deliver projects that make a real impact.
+          </p>
+          <p class="about-desc reveal">
+            Born from a passion for technology and a drive to make digital innovation accessible,
+            FYC brings fresh perspectives and cutting-edge skills to every project we take on.
+          </p>
+          <a href="#contact" class="btn btn-outline reveal">Work With Us</a>
         </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="name@example.com"
-            required
-          />
+        <div class="about-visual reveal">
+          <div class="about-card">
+            <div class="about-card-label">// Tech Stack</div>
+            <div class="about-tech-stack">
+              <div class="tech-item"><span class="tech-dot cyan"></span>React / Next.js</div>
+              <div class="tech-item"><span class="tech-dot purple"></span>Node.js / Express</div>
+              <div class="tech-item"><span class="tech-dot green"></span>Python / AI&ML</div>
+              <div class="tech-item"><span class="tech-dot cyan"></span>TypeScript</div>
+              <div class="tech-item"><span class="tech-dot purple"></span>PostgreSQL / MongoDB</div>
+              <div class="tech-item"><span class="tech-dot green"></span>GSAP / Three.js</div>
+              <div class="tech-item"><span class="tech-dot cyan"></span>Docker / AWS</div>
+              <div class="tech-item"><span class="tech-dot purple"></span>Figma / UI·UX</div>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input
-            type="text"
-            class="form-control"
-            id="subject"
-            name="subject"
-            placeholder="What's this about?"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea
-            class="form-control"
-            id="message"
-            name="message"
-            rows="5"
-            placeholder="Your message here..."
-            required
-          ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number (optional)</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="phone"
-            name="phone"
-            placeholder="Your phone number"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
-      <div id="form-status" class="form-status"></div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <p>A Fraser Youth Coding Project. All rights reserved.</p>
-    </footer>
+  <!-- Services -->
+  <section id="services" class="services section-padding">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">What We Do</div>
+        <h2 class="section-title reveal">Services built for <span class="gradient-text">impact</span></h2>
+        <p class="section-desc reveal">From concept to deployment, we deliver full-stack solutions that scale.</p>
+      </div>
+      <div class="services-grid">
 
-    <!-- Floating theme toggle button -->
-    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌓</button>
-  </body>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Web Development</h3>
+          <p>High-performance websites and web apps built with modern frameworks. From landing pages to full-scale platforms.</p>
+          <div class="service-tags"><span>React</span><span>Next.js</span><span>Node.js</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3>Mobile Applications</h3>
+          <p>Cross-platform mobile apps that deliver native-level performance and beautiful, intuitive interfaces.</p>
+          <div class="service-tags"><span>React Native</span><span>Flutter</span><span>iOS/Android</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2v6h6"/></svg>
+          </div>
+          <h3>AI &amp; ML Solutions</h3>
+          <p>Intelligent applications powered by machine learning — chatbots, data analytics, and recommendation engines.</p>
+          <div class="service-tags"><span>Python</span><span>TensorFlow</span><span>OpenAI API</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+          </div>
+          <h3>UI / UX Design</h3>
+          <p>Beautiful, user-centred design systems and interfaces that convert visitors into loyal customers.</p>
+          <div class="service-tags"><span>Figma</span><span>Design Systems</span><span>Prototyping</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </div>
+          <h3>API Development</h3>
+          <p>Robust, scalable backend APIs and microservices architecture built for reliability and peak performance.</p>
+          <div class="service-tags"><span>REST</span><span>GraphQL</span><span>WebSockets</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <h3>Code Education</h3>
+          <p>Workshops, bootcamps and mentorship programmes that teach the next generation of developers.</p>
+          <div class="service-tags"><span>Workshops</span><span>Mentorship</span><span>Bootcamps</span></div>
+          <div class="service-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="projects section-padding">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Our Work</div>
+        <h2 class="section-title reveal">Projects that <span class="gradient-text">matter</span></h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-image">
+            <div class="project-img-placeholder" style="background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(162,89,255,0.12))">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="project-link">View Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-category">Education · Web App</div>
+            <h3>Ghana Senior High Schools</h3>
+            <p>A comprehensive database and search platform providing detailed information on senior high schools across Ghana, helping students make informed decisions about their education.</p>
+            <div class="project-tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-image">
+            <div class="project-img-placeholder" style="background:linear-gradient(135deg,rgba(162,89,255,0.12),rgba(57,255,20,0.12))">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#A259FF" stroke-width="1"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="project-link">View Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-category">EdTech · AI</div>
+            <h3>Novari Study</h3>
+            <p>An AI-powered study application that creates personalised learning plans, tracks progress, and makes studying more engaging with smart flashcards, quizzes, and instant feedback.</p>
+            <div class="project-tech"><span>Python</span><span>React</span><span>OpenAI API</span><span>MongoDB</span></div>
+          </div>
+        </div>
+
+        <div class="project-card project-stealth reveal">
+          <div class="project-info project-info-centered">
+            <div class="project-category">Coming Soon</div>
+            <h3>Project Alpha</h3>
+            <p>An upcoming platform currently in stealth development. Stay tuned for the announcement.</p>
+            <div class="project-tech"><span>In Development</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="team section-padding">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">The Team</div>
+        <h2 class="section-title reveal">Built by <span class="gradient-text">passionate</span> people</h2>
+        <p class="section-desc reveal">A crew of young, talented developers and designers pushing every boundary.</p>
+      </div>
+      <div class="team-grid">
+
+        <div class="team-card reveal">
+          <div class="team-img-wrapper">
+            <img src="VHWR8117.JPG" alt="Reginald — Founder" class="team-img" loading="lazy">
+            <div class="team-img-glow"></div>
+          </div>
+          <div class="team-info">
+            <h3>Reginald</h3>
+            <div class="team-role">Founder &amp; Lead Developer</div>
+            <p>Student web developer and designer passionate about building clean, interactive digital experiences that make a difference.</p>
+            <div class="team-skills"><span>React</span><span>Node.js</span><span>UI/UX</span></div>
+            <div class="team-socials">
+              <a href="#" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+              <a href="#" aria-label="Twitter / X">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card team-open reveal">
+          <div class="team-open-inner">
+            <div class="team-open-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v16m-8-8h16"/></svg>
+            </div>
+            <h3>Join the Team</h3>
+            <p>We're looking for talented developers and designers to build the future with FYC.</p>
+            <a href="#contact" class="btn-small">Apply Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact section-padding">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="section-label reveal">Contact</div>
+          <h2 class="section-title reveal">Let's build something<br><span class="gradient-text">great together</span></h2>
+          <p class="reveal">Have a project in mind? Drop us a message and we'll get back to you within 24 hours.</p>
+          <div class="contact-details reveal">
+            <div class="contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>help.fraseryouthcoding@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Response within 24 hours</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-wrapper reveal">
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Send Message</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+          <div id="form-status" class="form-status"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">FYC</span>
+          <p>Fraser Youth Coding — Building digital excellence, one project at a time.</p>
+          <div class="footer-socials">
+            <a href="#">GitHub</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#team">Team</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="#services">Web Development</a>
+          <a href="#services">Mobile Apps</a>
+          <a href="#services">AI Solutions</a>
+          <a href="#services">UI/UX Design</a>
+          <a href="#services">Code Education</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Fraser Youth Coding. All rights reserved.</p>
+        <p>Built with passion by FYC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js.js"></script>
+</body>
 </html>
