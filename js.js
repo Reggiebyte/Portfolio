@@ -1,6 +1,14 @@
 // FYC — Fraser Youth Coding | GSAP Animations
 
+if (typeof gsap === 'undefined') {
+  console.warn('GSAP not loaded — running without animations');
+  throw new Error('GSAP unavailable');
+}
+
 gsap.registerPlugin(ScrollTrigger);
+
+// Mark body so CSS reveal-hide only applies when GSAP is confirmed
+document.documentElement.classList.add('gsap-ready');
 
 /* ─── Custom Cursor ──────────────────────────────────────────── */
 const cursor   = document.getElementById('cursor');
@@ -86,10 +94,12 @@ gsap.to('.orb-3', { x: 28,  y: 44,  repeat: -1, yoyo: true, ease: 'sine.inOut', 
 
 /* ─── Scroll Reveal ──────────────────────────────────────────── */
 gsap.utils.toArray('.reveal').forEach(el => {
-  gsap.to(el, {
-    opacity: 1, y: 0, duration: .85, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' }
-  });
+  gsap.fromTo(el,
+    { opacity: 0, y: 28 },
+    { opacity: 1, y: 0, duration: .85, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' }
+    }
+  );
 });
 
 /* ─── Counter Animations ─────────────────────────────────────── */
