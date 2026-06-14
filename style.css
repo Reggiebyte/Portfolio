@@ -512,6 +512,19 @@ a   { color: inherit; text-decoration: none; }
 }
 .team-card:hover { border-color: var(--border-hi); transform: translateY(-4px); }
 .team-img-wrapper { position: relative; overflow: hidden; height: 270px; }
+.team-avatar-wrapper {
+  height: 270px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(0,255,65,.06), rgba(0,200,83,.03));
+  border-bottom: 1px solid var(--border);
+}
+.team-avatar {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display); font-size: 2rem; font-weight: 700;
+  color: #000; letter-spacing: 1px;
+  box-shadow: 0 0 40px rgba(0,255,65,.2);
+}
 .team-img {
   width: 100%; height: 100%; object-fit: cover; object-position: center top;
   transition: transform .4s var(--ease-out), filter .4s;
