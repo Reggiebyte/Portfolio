@@ -61,22 +61,25 @@ document.querySelectorAll('.mobile-link').forEach(l =>
 /* ─── Smooth Anchor Scroll ───────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
     e.preventDefault();
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (!target) return;
     const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
 
 /* ─── Hero Entrance ──────────────────────────────────────────── */
+// fromTo forces start state regardless of CSS, so animation always plays
 gsap.timeline({ defaults: { ease: 'power3.out' } })
-  .to('.hero-badge',       { opacity: 1, y: 0, duration: .8, delay: .2 })
-  .to('.hero-line',        { opacity: 1, y: 0, duration: .9, stagger: .14 }, '-=.35')
-  .to('.hero-subtitle',    { opacity: 1, y: 0, duration: .8 }, '-=.4')
-  .to('.hero-actions',     { opacity: 1, y: 0, duration: .7 }, '-=.4')
-  .to('.hero-stats',       { opacity: 1, y: 0, duration: .7 }, '-=.3')
-  .to('.scroll-indicator', { opacity: 1,        duration: .7 }, '-=.2');
+  .fromTo('.hero-badge',    { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8, delay: .2 })
+  .fromTo('.hero-line',     { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: .9, stagger: .14 }, '-=.35')
+  .fromTo('.hero-subtitle', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=.4')
+  .fromTo('.hero-actions',  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .7 }, '-=.4')
+  .fromTo('.hero-stats',    { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .7 }, '-=.3')
+  .fromTo('.scroll-indicator', { opacity: 0 },     { opacity: 1, duration: .7 }, '-=.2');
 
 /* ─── Floating Code Snippets ─────────────────────────────────── */
 gsap.from('.code-snippet', {
@@ -117,15 +120,22 @@ document.querySelectorAll('.stat-num').forEach(el => {
   });
 });
 
-/* ─── Services Stagger + Icon Tilt ──────────────────────────── */
-gsap.from('.service-card', {
-  opacity: 0, y: 48, stagger: .1, duration: .85, ease: 'power3.out',
-  scrollTrigger: { trigger: '.services-grid', start: 'top 80%' }
-});
+/* ─── Services Stagger + Icon Tilt + Click ───────────────────── */
+gsap.fromTo('.service-card',
+  { opacity: 0, y: 48 },
+  { opacity: 1, y: 0, stagger: .1, duration: .85, ease: 'power3.out',
+    scrollTrigger: { trigger: '.services-grid', start: 'top 80%' }
+  }
+);
 document.querySelectorAll('.service-card').forEach(card => {
   const icon = card.querySelector('.service-icon');
-  card.addEventListener('mouseenter', () => gsap.to(icon, { rotation: 6,  duration: .3, ease: 'back.out(2)' }));
-  card.addEventListener('mouseleave', () => gsap.to(icon, { rotation: 0,  duration: .3, ease: 'back.out(2)' }));
+  card.addEventListener('mouseenter', () => gsap.to(icon, { rotation: 6, duration: .3, ease: 'back.out(2)' }));
+  card.addEventListener('mouseleave', () => gsap.to(icon, { rotation: 0, duration: .3, ease: 'back.out(2)' }));
+  card.addEventListener('click', () => {
+    const contact = document.getElementById('contact');
+    const top = contact.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
 });
 
 /* ─── Project Cards Parallax ─────────────────────────────────── */
@@ -137,10 +147,12 @@ gsap.utils.toArray('.project-card').forEach(card => {
 });
 
 /* ─── Team Cards Stagger ─────────────────────────────────────── */
-gsap.from('.team-card', {
-  opacity: 0, y: 40, stagger: .12, duration: .85, ease: 'power3.out',
-  scrollTrigger: { trigger: '.team-grid', start: 'top 82%' }
-});
+gsap.fromTo('.team-card',
+  { opacity: 0, y: 40 },
+  { opacity: 1, y: 0, stagger: .12, duration: .85, ease: 'power3.out',
+    scrollTrigger: { trigger: '.team-grid', start: 'top 82%' }
+  }
+);
 
 /* ─── Tech Stack Stagger ─────────────────────────────────────── */
 gsap.from('.tech-item', {
@@ -153,6 +165,9 @@ gsap.from('.footer-brand, .footer-links', {
   opacity: 0, y: 26, stagger: .1, duration: .75, ease: 'power3.out',
   scrollTrigger: { trigger: '.footer', start: 'top 90%' }
 });
+
+// Recalculate all trigger positions after full page render
+window.addEventListener('load', () => ScrollTrigger.refresh());
 
 /* ─── Contact Form ───────────────────────────────────────────── */
 const form       = document.getElementById('contact-form');
